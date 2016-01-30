@@ -9,9 +9,16 @@ public class RobotMap {
 	
 	public static int pwm_drive_left = 0;
 	public static int pwm_drive_right = 1;
+	public static int pwm_shooter_left = 2;
+	public static int pwm_shooter_right = 3;
+	public static int pwm_intake_1 = 4;
 	
 	public static int pdp_drive_left_1 = 0;
-	public static int pdp_drive_left_2 = 0;
-	public static int pdp_drive_right_1 = 0;
-	public static int pdp_drive_right_2 = 0;
+	public static int pdp_drive_left_2 = 1;
+	public static int pdp_drive_right_1 = 2;
+	public static int pdp_drive_right_2 = 3;
+	public static int pdp_shooter_left = 4;
+	public static int pdp_shooter_right = 5;
+	
+	public static int d_shooter_tach = 0;
 }

@@ -7,13 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.team5892.frc2016.commands.ExampleCommand;
-import com.team5892.frc2016.subsystems.ExampleSubsystem;
+import com.team5892.frc2016.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final Drive drive = new Drive();
 	public static OI oi;
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
