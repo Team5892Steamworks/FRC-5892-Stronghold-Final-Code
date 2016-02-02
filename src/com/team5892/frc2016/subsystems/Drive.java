@@ -8,8 +8,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem {
     
-	CheesySpeedController m_drive_left = new CheesySpeedController(new VictorSP(0), Robot.pdp, new int[]{RobotMap.pdp_drive_left_1, RobotMap.pdp_drive_left_2});
-	CheesySpeedController m_drive_right = new CheesySpeedController(new VictorSP(1), Robot.pdp, new int[]{RobotMap.pdp_drive_right_1, RobotMap.pdp_drive_right_2});
+	CheesySpeedController m_drive_left = new CheesySpeedController(
+			new VictorSP(RobotMap.pwm_drive_left),
+			Robot.pdp, new int[]{
+					RobotMap.pdp_drive_left_1,
+					RobotMap.pdp_drive_left_2});
+	CheesySpeedController m_drive_right = new CheesySpeedController(
+			new VictorSP(RobotMap.pwm_drive_right),
+			Robot.pdp, new int[]{
+					RobotMap.pdp_drive_right_1,
+					RobotMap.pdp_drive_right_2});
     
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
