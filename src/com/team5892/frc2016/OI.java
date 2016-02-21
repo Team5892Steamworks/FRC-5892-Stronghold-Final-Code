@@ -2,7 +2,8 @@ package com.team5892.frc2016;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import com.team5892.frc2016.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import com.team5892.frc2016.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -36,7 +37,10 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	Joystick pilot = new Joystick(0);
+	public Joystick pilot = new Joystick(0);
+	public Button shooterStart = new JoystickButton(pilot, 1);
 	
+	public OI() {
+		shooterStart.toggleWhenPressed(new ShooterSet());
+	}
 }
-

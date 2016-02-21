@@ -6,25 +6,28 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import com.team5892.frc2016.commands.ExampleCommand;
 import com.team5892.frc2016.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final Drive drive = new Drive();
+	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static Drive drive;
+	public static Shooter shooter;
 	public static OI oi;
-	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
-
+	public static PowerDistributionPanel pdp;
+	
     Command autonomousCommand;
     SendableChooser chooser;
 
     public void robotInit() {
+    	drive = new Drive();
+    	shooter = new Shooter();
 		oi = new OI();
+		pdp = new PowerDistributionPanel();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
+        //chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }

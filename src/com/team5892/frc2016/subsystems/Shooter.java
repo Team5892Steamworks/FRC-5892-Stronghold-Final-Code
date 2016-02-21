@@ -11,10 +11,13 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 public class Shooter extends PIDSubsystem {
 
+	VictorSP m_shooter_left = new VictorSP(RobotMap.pwm_shooter_left);
+	VictorSP m_shooter_right = new VictorSP(RobotMap.pwm_shooter_right);
+	
 	private CheesySpeedController m_shooter = new CheesySpeedController(
 			new SpeedController[]{
-					new VictorSP(RobotMap.pwm_shooter_left),
-					new VictorSP(RobotMap.pwm_shooter_right)},
+					m_shooter_left,
+					m_shooter_right},
 			Robot.pdp, new int[]{
 					RobotMap.pdp_shooter_left,
 					RobotMap.pdp_shooter_right});
@@ -23,6 +26,7 @@ public class Shooter extends PIDSubsystem {
 	
 	public Shooter() {
 		super("Shooter", RobotMap.kFlywheelP, RobotMap.kFlywheelI, RobotMap.kFlywheelD, RobotMap.kFlywheelF);
+		m_shooter_left.setInverted(true);
 		tach_trigger.setLimitsVoltage(RobotMap.kTachAnalogTriggerLow, RobotMap.kTachAnalogTriggerHigh);
 		tach.setUpDownCounterMode();
 	}
