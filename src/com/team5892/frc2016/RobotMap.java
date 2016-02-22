@@ -13,8 +13,10 @@ public class RobotMap {
 	public static int pwm_shooter_left = 2;
 	public static int pwm_shooter_right = 3;
 	public static int pwm_intake_1 = 4;
-	public static int pwm_hanging_arm_pivot_1 = 5;
-	public static int pwm_hanging_arm_pivot_2 = 6;
+	public static int pwm_hanger_pivot_left = 5;
+	public static int pwm_hanger_pivot_right = 6;
+	public static int pwm_hanger_winch_left = 7;
+	public static int pwm_hanger_winch_right = 8;
 	
 	// PDP
 	public static int pdp_drive_left_1 = 0;
@@ -24,11 +26,15 @@ public class RobotMap {
 	public static int pdp_shooter_left = 4;
 	public static int pdp_shooter_right = 5;
 	public static int pdp_intake_1 = 6;
-	public static int pdp_hanging_arm_pivot_1 = 7;
-	public static int pdp_hanging_arm_pivot_2 = 8;
+	public static int pdp_hanger_pivot_left = 7;
+	public static int pdp_hanger_pivot_right = 8;
+	public static int pdp_hanger_winch_left = 9;
+	public static int pdp_hanger_winch_right = 10;
 	
 	// AI
 	public static int ai_shooter_tach = 0;
+	public static int ai_hanger_angle_left = 1;
+	public static int ai_hanger_angle_right = 2;
 	
 	public static double kTachAnalogTriggerLow = 0;
 	public static double kTachAnalogTriggerHigh = 0;
