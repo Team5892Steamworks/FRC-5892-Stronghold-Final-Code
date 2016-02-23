@@ -19,7 +19,7 @@ public class HangerManual extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.hanger.setPivotPower(-Robot.oi.copilot.getRawAxis(1)+ 0.1, -Robot.oi.copilot.getRawAxis(1)+ 0.1);
+    	Robot.hanger.setPivotPower(-Robot.oi.copilot.getRawAxis(1)+ 0.2, -Robot.oi.copilot.getRawAxis(1)+ 0.2);   
     	Robot.hanger.setWinchPower(Robot.oi.copilot.getRawAxis(5), Robot.oi.copilot.getRawAxis(5));
     }
 

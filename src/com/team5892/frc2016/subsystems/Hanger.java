@@ -6,7 +6,6 @@ import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.hanger.*;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
