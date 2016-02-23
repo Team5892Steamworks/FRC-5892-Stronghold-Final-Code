@@ -31,13 +31,22 @@ public class RobotMap {
 	public static int pdp_hanger_winch_left = 9;
 	public static int pdp_hanger_winch_right = 10;
 	
+	// DIO
+	
+	
 	// AI
 	public static int ai_shooter_tach = 0;
 	public static int ai_hanger_angle_left = 1;
 	public static int ai_hanger_angle_right = 2;
 	
+	// Solenoid
+	public static int solenoid_hanger_pto = 0;
+	
 	public static double kTachAnalogTriggerLow = 0;
 	public static double kTachAnalogTriggerHigh = 0;
+	
+	public static double kHangerLeftPivotTheta = 0.0;
+	public static double kHangerRightPivotTheta = 0.0;
 	
 	public static double kFlywheelP = 0;
 	public static double kFlywheelI = 0;

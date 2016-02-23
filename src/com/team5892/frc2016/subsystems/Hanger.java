@@ -3,7 +3,7 @@ package com.team5892.frc2016.subsystems;
 import com.androb4.frc.lib.CheesySpeedController;
 import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
-
+import com.team5892.frc2016.commands.*;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -30,15 +30,14 @@ public class Hanger extends Subsystem {
     AnalogInput ai_angle_left = new AnalogInput(RobotMap.ai_hanger_angle_left);
     AnalogInput ai_angle_right = new AnalogInput(RobotMap.ai_hanger_angle_right);
     
-    Solenoid ptoSolenoid = new Solenoid(0, 0);
-    
+    Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
     
     public Hanger() {
     	
     }
     
     public void initDefaultCommand() {
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new HangerManual());
     }
     
     public void setPivotPower(double left, double right) {
@@ -53,6 +52,14 @@ public class Hanger extends Subsystem {
     
     public void ptoSet(boolean shift) {
     	ptoSolenoid.set(shift);
+    }
+    
+    public double getLeftAngle() {
+    	return ai_angle_left.getVoltage() * RobotMap.kHangerLeftPivotTheta;
+    }
+    
+    public double getRightAngle() {
+    	return ai_angle_right.getVoltage() * RobotMap.kHangerRightPivotTheta;
     }
     
 }
