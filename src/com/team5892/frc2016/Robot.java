@@ -1,6 +1,7 @@
 
 package com.team5892.frc2016;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -68,11 +69,25 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        //Below is Compressor
+
+         
     }
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-    }
+        Compressor Compressor1 = new Compressor(0);
+
+        Compressor1.setClosedLoopControl(true);
+        Compressor1.start();
+        if (Compressor1.getPressureSwitchValue()){
+        	Compressor1.setClosedLoopControl(false);
+        }
+        else{
+        	Compressor1.setClosedLoopControl(true);
+        }
+    } 
     
     public void testPeriodic() {
         LiveWindow.run();

@@ -38,9 +38,13 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public Joystick pilot = new Joystick(0);
-	public Button shooterStart = new JoystickButton(pilot, 1);
+	public Joystick copilot = new Joystick(1);
+	
+	public Button shooterStart = new JoystickButton(copilot, 2);
+	public Button GearShift = new JoystickButton(copilot, 1);
 	
 	public OI() {
 		shooterStart.toggleWhenPressed(new ShooterSet());
-	}
+		GearShift.toggleWhenPressed(new GearShiftSet());
+	} 
 }

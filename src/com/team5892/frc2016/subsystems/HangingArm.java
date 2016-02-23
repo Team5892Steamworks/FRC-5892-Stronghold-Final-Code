@@ -3,6 +3,8 @@ package com.team5892.frc2016.subsystems;
 import com.androb4.frc.lib.CheesySpeedController;
 import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,8 +19,10 @@ public class HangingArm extends Subsystem {
     				RobotMap.pdp_hanging_arm_pivot_1,
     				RobotMap.pdp_hanging_arm_pivot_2});
 
+    
+    
     public void initDefaultCommand() {
-        //setDefaultCommand(new MySpecialCommand());
+        //setDefaultComGmand(new MySpecialCommand());
     }
-}
+}	
 
