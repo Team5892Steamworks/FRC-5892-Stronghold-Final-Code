@@ -5,6 +5,7 @@ import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -29,6 +30,9 @@ public class Hanger extends Subsystem {
     AnalogInput ai_angle_left = new AnalogInput(RobotMap.ai_hanger_angle_left);
     AnalogInput ai_angle_right = new AnalogInput(RobotMap.ai_hanger_angle_right);
     
+    Solenoid ptoSolenoid = new Solenoid(0, 0);
+    
+    
     public Hanger() {
     	
     }
@@ -45,6 +49,10 @@ public class Hanger extends Subsystem {
     public void setWinchPower(double left, double right) {
     	m_winch_left.set(left);
     	m_winch_right.set(right);
+    }
+    
+    public void ptoSet(boolean shift) {
+    	ptoSolenoid.set(shift);
     }
     
 }

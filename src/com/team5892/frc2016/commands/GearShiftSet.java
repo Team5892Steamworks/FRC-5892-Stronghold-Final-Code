@@ -1,5 +1,7 @@
 package com.team5892.frc2016.commands;
 
+import com.team5892.frc2016.Robot;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -7,11 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class GearShiftSet extends Command {
-	public Solenoid GearShift = new Solenoid(0,1);
 
     public GearShiftSet() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.hanger);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +21,8 @@ public class GearShiftSet extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	GearShift.set(true);
+    	Robot.hanger.ptoSet(true);
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,10 +32,12 @@ public class GearShiftSet extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.hanger.ptoSet(false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.hanger.ptoSet(false);
     }
 }

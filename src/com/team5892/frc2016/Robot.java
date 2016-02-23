@@ -79,16 +79,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        Compressor Compressor1 = new Compressor(0);
 
-        Compressor1.setClosedLoopControl(true);
-        Compressor1.start();
-        if (Compressor1.getPressureSwitchValue()){
-        	Compressor1.setClosedLoopControl(false);
-        }
-        else{
-        	Compressor1.setClosedLoopControl(true);
-        }
     } 
     
     public void testPeriodic() {
