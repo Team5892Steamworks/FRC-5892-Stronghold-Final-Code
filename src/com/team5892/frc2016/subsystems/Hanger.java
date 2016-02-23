@@ -5,6 +5,7 @@ import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.hanger.*;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,6 +32,9 @@ public class Hanger extends Subsystem {
     AnalogInput ai_angle_right = new AnalogInput(RobotMap.ai_hanger_angle_right);
     
     Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
+    
+	public DigitalInput switchLeft = new DigitalInput(0);
+	public DigitalInput switchRight = new DigitalInput(1);
     
     public Hanger() {
     	m_pivot_right.setInverted(true);
