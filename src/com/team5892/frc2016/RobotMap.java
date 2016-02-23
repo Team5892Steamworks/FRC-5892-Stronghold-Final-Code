@@ -12,11 +12,11 @@ public class RobotMap {
 	public static int pwm_drive_right = 1;
 	public static int pwm_shooter_left = 2;
 	public static int pwm_shooter_right = 3;
-	public static int pwm_intake_1 = 4;
-	public static int pwm_hanger_pivot_left = 5;
-	public static int pwm_hanger_pivot_right = 6;
-	public static int pwm_hanger_winch_left = 7;
-	public static int pwm_hanger_winch_right = 8;
+	public static int pwm_intake_1 = 8;
+	public static int pwm_hanger_pivot_left = 4;
+	public static int pwm_hanger_pivot_right = 5;
+	public static int pwm_hanger_winch_left = 6;
+	public static int pwm_hanger_winch_right = 7;
 	
 	// PDP
 	public static int pdp_drive_left_1 = 0;

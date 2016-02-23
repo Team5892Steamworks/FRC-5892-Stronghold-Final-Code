@@ -33,7 +33,7 @@ public class Hanger extends Subsystem {
     Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
     
     public Hanger() {
-    	
+    	m_pivot_left.setInverted(true);
     }
     
     public void initDefaultCommand() {
