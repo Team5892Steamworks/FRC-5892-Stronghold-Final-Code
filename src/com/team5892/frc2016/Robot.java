@@ -15,6 +15,7 @@ public class Robot extends IterativeRobot {
 
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static Drive drive;
+	public static Hanger hanger;
 	public static Shooter shooter;
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
     	drive = new Drive();
+    	hanger = new Hanger();
     	shooter = new Shooter();
 		oi = new OI();
 		pdp = new PowerDistributionPanel();
