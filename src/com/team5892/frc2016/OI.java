@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com.team5892.frc2016.commands.*;
+import com.team5892.frc2016.commands.hanger.HangerInitHang;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,9 +43,11 @@ public class OI {
 	
 	public Button shooterStart = new JoystickButton(copilot, 2);
 	public Button GearShift = new JoystickButton(copilot, 1);
+	public Button HangerInit = new JoystickButton(copilot, 5);
 	
 	public OI() {
 		shooterStart.toggleWhenPressed(new ShooterSet());
 		GearShift.toggleWhenPressed(new GearShiftSet());
+		HangerInit.whenPressed(new HangerInitHang());
 	} 
 }
