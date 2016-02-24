@@ -28,12 +28,11 @@ public class HangerInitHang extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.hanger.switchLeft.isSwitchSet() || Robot.hanger.switchRight.isSwitchSet();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.hanger.setPivotPower(0, 0);
     }
 
     // Called when another command which requires one or more of the same

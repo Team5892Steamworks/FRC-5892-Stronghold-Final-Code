@@ -21,6 +21,12 @@ public class HangerManual extends Command {
     protected void execute() {
     	Robot.hanger.setPivotPower(-Robot.oi.copilot.getRawAxis(1)+ 0.2, -Robot.oi.copilot.getRawAxis(1)+ 0.2);   
     	Robot.hanger.setWinchPower(Robot.oi.copilot.getRawAxis(5), Robot.oi.copilot.getRawAxis(5));
+    	
+    	if (Robot.hanger.switchLeft.get() || Robot.hanger.switchRight.get()){
+    		if (Robot.oi.copilot.getRawAxis(1) > 0){
+    			Robot.hanger.setPivotPower(0, 0);
+    		}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
