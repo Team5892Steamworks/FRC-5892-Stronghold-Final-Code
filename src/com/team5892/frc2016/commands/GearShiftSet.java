@@ -12,7 +12,7 @@ public class GearShiftSet extends Command {
 
     public GearShiftSet() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.hanger);
+        //requires(Robot.hanger);
     }
 
     // Called just before this Command runs the first time

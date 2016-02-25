@@ -42,11 +42,18 @@ public class RobotMap {
 	// Solenoid
 	public static int solenoid_hanger_pto = 0;
 	
+	
+	// Constants
 	public static double kTachAnalogTriggerLow = 0;
 	public static double kTachAnalogTriggerHigh = 0;
 	
-	public static double kHangerLeftPivotTheta = 0.0;
-	public static double kHangerRightPivotTheta = 0.0;
+	public static double kHangerLeftPivotKTheta = 0.0;
+	public static double kHangerRightPivotKTheta = 0.0;
+	
+	public static double kHangerLeftBottomLimitDegrees = 2;
+	public static double kHangerLeftUpLimitDegrees = 100;
+	public static double kHangerRightBottomLimitDegrees = 2;
+	public static double kHangerRightUpLimitDegrees = 100;
 	
 	public static double kFlywheelP = 0;
 	public static double kFlywheelI = 0;
