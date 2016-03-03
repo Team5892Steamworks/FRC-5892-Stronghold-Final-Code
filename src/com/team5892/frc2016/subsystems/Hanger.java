@@ -60,8 +60,10 @@ public class Hanger extends Subsystem {
      * @param right - Power for the left pivot motor.
      */
     public void setPivotPower(double left, double right) {
-    	m_pivot_left.set(left);
-    	m_pivot_right.set(right);
+    	if(getLeftAngle() > 110.0)
+    		m_pivot_left.set(left);
+    	if(getRightAngle() > 110.0)
+    		m_pivot_right.set(right);
     }
     
     /**
@@ -73,6 +75,11 @@ public class Hanger extends Subsystem {
     public void setWinchPower(double left, double right) {
     	m_winch_left.set(left);
     	m_winch_right.set(right);
+    }
+    
+    public void setUnsafePivotPower(double left, double right) {
+    	m_pivot_left.set(left);
+    	m_pivot_right.set(right);
     }
     
     /**
