@@ -60,6 +60,11 @@ public class Hanger extends Subsystem {
      * @param right - Power for the left pivot motor.
      */
     public void setPivotPower(double left, double right) {
+    	if(pivotLeftController.isEnabled())
+    		pivotLeftController.disable();
+    	if(pivotRightController.isEnabled())
+    		pivotRightController.disable();
+    	
     	if(getLeftAngle() > 110.0)
     		m_pivot_left.set(left);
     	if(getRightAngle() > 110.0)
@@ -107,6 +112,16 @@ public class Hanger extends Subsystem {
      */
     public double getRightAngle() {
     	return ai_angle_right.get();
+    }
+    
+    public void setPivotAngle(double angle) {
+    	if(!pivotLeftController.isEnabled())
+    		pivotLeftController.enable();
+    	pivotLeftController.setSetpoint(angle);
+    	
+    	if(!pivotRightController.isEnabled())
+    		pivotRightController.enable();
+    	pivotRightController.setSetpoint(angle);
     }
 }
 
