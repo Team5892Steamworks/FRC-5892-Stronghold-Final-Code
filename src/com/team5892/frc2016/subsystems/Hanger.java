@@ -4,8 +4,9 @@ import com.androb4.frc.lib.CheesySpeedController;
 import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.hanger.*;
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -13,28 +14,36 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Hanger extends Subsystem {
     
-    CheesySpeedController m_pivot_left = new CheesySpeedController(
+    private CheesySpeedController m_pivot_left = new CheesySpeedController(
     		new VictorSP(RobotMap.pwm_hanger_pivot_left),
     		Robot.pdp, RobotMap.pdp_hanger_pivot_left);
     
-    CheesySpeedController m_pivot_right = new CheesySpeedController(
+    private CheesySpeedController m_pivot_right = new CheesySpeedController(
     		new VictorSP(RobotMap.pwm_hanger_pivot_right),
     		Robot.pdp, RobotMap.pdp_hanger_pivot_right);
     
-    CheesySpeedController m_winch_left = new CheesySpeedController(
+    private CheesySpeedController m_winch_left = new CheesySpeedController(
     		new VictorSP(RobotMap.pwm_hanger_winch_left),
     		Robot.pdp, RobotMap.pdp_hanger_winch_left);
     
-    CheesySpeedController m_winch_right = new CheesySpeedController(
+    private CheesySpeedController m_winch_right = new CheesySpeedController(
     		new VictorSP(RobotMap.pwm_hanger_winch_right),
     		Robot.pdp, RobotMap.pdp_hanger_winch_right);
     
-    AnalogInput ai_angle_left = new AnalogInput(RobotMap.ai_hanger_angle_left);
-    AnalogInput ai_angle_right = new AnalogInput(RobotMap.ai_hanger_angle_right);
+    private AnalogPotentiometer ai_angle_left = new AnalogPotentiometer(RobotMap.ai_hanger_angle_left, RobotMap.kHangerLeftPivotKTheta);
+    private AnalogPotentiometer ai_angle_right = new AnalogPotentiometer(RobotMap.ai_hanger_angle_right, RobotMap.kHangerRightPivotKTheta);
     
-    Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
+    private Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
     
+<<<<<<< HEAD
     public DigitalInput limitSwitch = new DigitalInput(0);
+=======
+	public DigitalInput switchLeft = new DigitalInput(0);
+	public DigitalInput switchRight = new DigitalInput(1);
+	
+	PIDController pivotLeftController = new PIDController(1.0, 0.0, 0.0, ai_angle_left, m_pivot_left);
+	PIDController pivotRightController = new PIDController(1.0, 0.0, 0.0, ai_angle_right, m_pivot_right);
+>>>>>>> ff43ef9f0efeae1c762f979299974eed4e9b4470
     
     public Hanger() {
     	m_pivot_right.setInverted(true);
@@ -50,28 +59,76 @@ public class Hanger extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new HangerManual());
     }
-    
-    
+
+    /**
+     * Sets the power for the hanger pivot. positive is up, negative is down.
+     * 
+     * @param left - Power for the left pivot motor.
+     * @param right - Power for the left pivot motor.
+     */
     public void setPivotPower(double left, double right) {
-    	m_pivot_left.set(left);
-    	m_pivot_right.set(right);
+    	if(pivotLeftController.isEnabled())
+    		pivotLeftController.disable();
+    	if(pivotRightController.isEnabled())
+    		pivotRightController.disable();
+    	
+    	if(getLeftAngle() > 110.0)
+    		m_pivot_left.set(left);
+    	if(getRightAngle() > 110.0)
+    		m_pivot_right.set(right);
     }
     
+    /**
+     * Sets the power for the winch. Positive is extend, negative is retract.
+     * 
+     * @param left - Power for the left winch motor.
+     * @param right - Power for the left winch motor.
+     */
     public void setWinchPower(double left, double right) {
     	m_winch_left.set(left);
     	m_winch_right.set(right);
     }
     
+    public void setUnsafePivotPower(double left, double right) {
+    	m_pivot_left.set(left);
+    	m_pivot_right.set(right);
+    }
+    
+    /**
+     * Shifts the drive transmission into the PTO.
+     * 
+     * @param shift Set to PTO
+     */
     public void ptoSet(boolean shift) {
     	ptoSolenoid.set(shift);
     }
     
+    /**
+     * Returns angle of left arm in degrees. Angle is determined from the horizontal.
+     * 
+     * @return angle in degrees.
+     */
     public double getLeftAngle() {
-    	return ai_angle_left.getVoltage() * RobotMap.kHangerLeftPivotTheta;
+    	return ai_angle_left.get();
     }
     
+    /**
+     * Returns angle of right arm in degrees. Angle is determined from the horizontal.
+     * 
+     * @return angle in degrees.
+     */
     public double getRightAngle() {
-    	return ai_angle_right.getVoltage() * RobotMap.kHangerRightPivotTheta;
+    	return ai_angle_right.get();
+    }
+    
+    public void setPivotAngle(double angle) {
+    	if(!pivotLeftController.isEnabled())
+    		pivotLeftController.enable();
+    	pivotLeftController.setSetpoint(angle);
+    	
+    	if(!pivotRightController.isEnabled())
+    		pivotRightController.enable();
+    	pivotRightController.setSetpoint(angle);
     }
 }
 
