@@ -7,6 +7,7 @@ import com.team5892.frc2016.commands.hanger.*;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -33,12 +34,17 @@ public class Hanger extends Subsystem {
     
     Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
     
-	public DigitalInput switchLeft = new DigitalInput(0);
-	public DigitalInput switchRight = new DigitalInput(1);
+    public DigitalInput limitSwitch = new DigitalInput(0);
     
     public Hanger() {
     	m_pivot_right.setInverted(true);
     	m_winch_right.setInverted(true);
+    
+    }
+    public void operatorControl(){
+    	while (limitSwitch.get()) {
+    		Timer.delay(10);
+    	}
     }
     
     public void initDefaultCommand() {
