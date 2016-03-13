@@ -59,7 +59,11 @@ public class Hanger extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new HangerManual());
     }
-
+    
+    public void setAngle() {
+    	
+    }
+    
     /**
      * Sets the power for the hanger pivot. positive is up, negative is down.
      * 

@@ -17,10 +17,9 @@ public class HangerInitHang extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.hanger.setPivotPower(0.4, 0.4);
-    	//Timer.delay(.5);
-    	//Robot.hanger.setPivotPower(0.0, 0.0);
-    	Robot.hanger.setPivotAngle(100.0);
+    	Robot.hanger.setPivotPower(0.4, 0.4);
+    	Timer.delay(.5);
+    	Robot.hanger.setPivotPower(0.0, 0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
