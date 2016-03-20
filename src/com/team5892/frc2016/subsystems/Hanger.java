@@ -6,11 +6,12 @@ import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.hanger.*;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hanger extends Subsystem {
     
@@ -30,38 +31,34 @@ public class Hanger extends Subsystem {
     		new VictorSP(RobotMap.pwm_hanger_winch_right),
     		Robot.pdp, RobotMap.pdp_hanger_winch_right);
     
-    private AnalogPotentiometer ai_angle_left = new AnalogPotentiometer(RobotMap.ai_hanger_angle_left, RobotMap.kHangerLeftPivotKTheta);
-    private AnalogPotentiometer ai_angle_right = new AnalogPotentiometer(RobotMap.ai_hanger_angle_right, RobotMap.kHangerRightPivotKTheta);
+    private AnalogPotentiometer ai_angle_left = new AnalogPotentiometer(RobotMap.ai_hanger_angle_left, RobotMap.kHangerLeftPivotKTheta, 90);
+    private AnalogPotentiometer ai_angle_right = new AnalogPotentiometer(RobotMap.ai_hanger_angle_right, RobotMap.kHangerRightPivotKTheta, 142.377);
+    
+    public Encoder encoderWinchLeft = new Encoder(1, 2);
+    public Encoder encoderWinchRight = new Encoder(3, 4);
     
     private Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
+    private Solenoid hangerBrake = new Solenoid(RobotMap.solenoid_hanger_brake);
     
-<<<<<<< HEAD
-    public DigitalInput limitSwitch = new DigitalInput(0);
-=======
-	public DigitalInput switchLeft = new DigitalInput(0);
-	public DigitalInput switchRight = new DigitalInput(1);
+	public DigitalInput switchLeft = new DigitalInput(5);
+	public DigitalInput switchRight = new DigitalInput(6);
 	
-	PIDController pivotLeftController = new PIDController(1.0, 0.0, 0.0, ai_angle_left, m_pivot_left);
-	PIDController pivotRightController = new PIDController(1.0, 0.0, 0.0, ai_angle_right, m_pivot_right);
->>>>>>> ff43ef9f0efeae1c762f979299974eed4e9b4470
-    
+	PIDController pivotLeftController = new PIDController(0.05, 0.0, 0.01, ai_angle_left, m_pivot_left);
+	PIDController pivotRightController = new PIDController(0.05, 0.0, 0.01, ai_angle_right, m_pivot_right);
+	
+	PIDController armLengthLeftController = new PIDController(0.25, 0.0, 0.01, encoderWinchLeft, m_winch_left);
+	PIDController armLengthRightController = new PIDController(0.25, 0.0, 0.01, encoderWinchRight, m_winch_right);
+	
     public Hanger() {
     	m_pivot_right.setInverted(true);
-    	m_winch_right.setInverted(true);
-    
-    }
-    public void operatorControl(){
-    	while (limitSwitch.get()) {
-    		Timer.delay(10);
-    	}
+    	pivotLeftController.setOutputRange(-0.5, 0.5);
+    	pivotRightController.setOutputRange(-0.5, 0.5);
+    	encoderWinchRight.setDistancePerPulse(0.015);
+    	SmartDashboard.putData("Right Length PID", armLengthRightController);
     }
     
     public void initDefaultCommand() {
-        setDefaultCommand(new HangerManual());
-    }
-    
-    public void setAngle() {
-    	
+        //setDefaultCommand(new HangerManual());
     }
     
     /**
@@ -89,6 +86,10 @@ public class Hanger extends Subsystem {
      * @param right - Power for the left winch motor.
      */
     public void setWinchPower(double left, double right) {
+    	if(armLengthLeftController.isEnabled())
+    		armLengthLeftController.disable();
+    	if(armLengthRightController.isEnabled())
+    		armLengthRightController.disable();
     	m_winch_left.set(left);
     	m_winch_right.set(right);
     }
@@ -96,6 +97,7 @@ public class Hanger extends Subsystem {
     public void setUnsafePivotPower(double left, double right) {
     	m_pivot_left.set(left);
     	m_pivot_right.set(right);
+    	System.out.println(ai_angle_right.get());
     }
     
     /**
@@ -133,6 +135,20 @@ public class Hanger extends Subsystem {
     	if(!pivotRightController.isEnabled())
     		pivotRightController.enable();
     	pivotRightController.setSetpoint(angle);
+    }
+    
+    public void setArmLength(double length) {
+    	if(!armLengthLeftController.isEnabled())
+    		armLengthLeftController.enable();
+    	armLengthLeftController.setSetpoint(length);
+    	
+    	if(!armLengthRightController.isEnabled())
+    		armLengthRightController.enable();
+    	armLengthRightController.setSetpoint(length);
+    }
+    
+    public void setBrake(boolean on) {
+    	hangerBrake.set(!on);
     }
 }
 
