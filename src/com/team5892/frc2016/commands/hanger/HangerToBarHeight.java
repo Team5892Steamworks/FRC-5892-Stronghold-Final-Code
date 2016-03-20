@@ -17,8 +17,6 @@ public class HangerToBarHeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.hanger.setWinchPower(0.4, 0.4);
-    	Timer.delay(.5);
     	Robot.hanger.setWinchPower(0.0, 0.0);
     }
 

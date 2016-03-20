@@ -1,16 +1,20 @@
-package com.team5892.frc2016.commands.hanger;
+package com.team5892.frc2016.commands;
 
 import com.team5892.frc2016.Robot;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
  */
-public class HangerManual extends Command {
+public class ShooterShoot extends Command {
 
-    public HangerManual() {
+    public ShooterShoot() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.hanger);
+        requires(Robot.shooter);
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -19,24 +23,25 @@ public class HangerManual extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.hanger.setUnsafePivotPower(-Robot.oi.copilot.getRawAxis(1)+ 0.2, -Robot.oi.copilot.getRawAxis(1)+ 0.2);   
-    	Robot.hanger.setWinchPower(Robot.oi.copilot.getRawAxis(5), Robot.oi.copilot.getRawAxis(5));
+    	if(Robot.intake.isBallPresent()) {
+    		Timer.delay(1.5);
+    		cancel();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;    }
+        return false;
+    }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.hanger.setPivotPower(0, 0);
-    	Robot.hanger.setWinchPower(0, 0);
+    	//Scheduler.getInstance().add(new ShooterStow());
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.hanger.setPivotPower(0, 0);
-    	Robot.hanger.setWinchPower(0, 0);
+    	Scheduler.getInstance().add(new ShooterStow());
     }
 }
