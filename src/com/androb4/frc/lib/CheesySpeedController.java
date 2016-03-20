@@ -81,4 +81,10 @@ public class CheesySpeedController implements SpeedController {
         }
 	}
 
+	@Override
+	public void stopMotor() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
