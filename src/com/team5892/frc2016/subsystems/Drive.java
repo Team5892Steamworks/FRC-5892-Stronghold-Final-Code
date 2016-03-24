@@ -44,8 +44,8 @@ public class Drive extends Subsystem {
     	double left = t_left + skim(t_right);
     	double right = t_right + skim(t_left);
     	
-    	m_drive_left.set(left*0.5);
-    	m_drive_right.set(right*0.5);
+    	m_drive_left.set(left*0.75);
+    	m_drive_right.set(right*0.75);
     }
     
     public void cheesyDrive2(double throttle, double wheel, boolean isQuickTurn) {

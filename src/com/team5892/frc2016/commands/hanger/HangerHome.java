@@ -22,6 +22,7 @@ public class HangerHome extends Command {
     	Robot.hanger.setWinchPower(-0.25, -0.25);
     	Timer.delay(2.0);
     	Robot.hanger.setWinchPower(0.0, 0.0);
+    	Robot.hanger.encoderWinchLeft.reset();
     	Robot.hanger.encoderWinchRight.reset();
     }
 
@@ -31,7 +32,7 @@ public class HangerHome extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

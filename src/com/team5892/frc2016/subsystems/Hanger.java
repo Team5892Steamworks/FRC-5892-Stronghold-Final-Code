@@ -31,11 +31,11 @@ public class Hanger extends Subsystem {
     		new VictorSP(RobotMap.pwm_hanger_winch_right),
     		Robot.pdp, RobotMap.pdp_hanger_winch_right);
     
-    private AnalogPotentiometer ai_angle_left = new AnalogPotentiometer(RobotMap.ai_hanger_angle_left, RobotMap.kHangerLeftPivotKTheta, 90);
-    private AnalogPotentiometer ai_angle_right = new AnalogPotentiometer(RobotMap.ai_hanger_angle_right, RobotMap.kHangerRightPivotKTheta, 142.377);
+    private AnalogPotentiometer ai_angle_left = new AnalogPotentiometer(RobotMap.ai_hanger_angle_left, RobotMap.kHangerLeftPivotFullRange, RobotMap.kHangerLeftPivotOffset);
+    private AnalogPotentiometer ai_angle_right = new AnalogPotentiometer(RobotMap.ai_hanger_angle_right, RobotMap.kHangerRightPivotFullRange, RobotMap.kHangerRightPivotOffset);
     
-    public Encoder encoderWinchLeft = new Encoder(1, 2);
-    public Encoder encoderWinchRight = new Encoder(3, 4);
+    public Encoder encoderWinchLeft = new Encoder(RobotMap.di_hanger_winch_encoder_left_a, RobotMap.di_hanger_winch_encoder_left_b);
+    public Encoder encoderWinchRight = new Encoder(RobotMap.di_hanger_winch_encoder_right_a, RobotMap.di_hanger_winch_encoder_right_b);
     
     private Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
     private Solenoid hangerBrake = new Solenoid(RobotMap.solenoid_hanger_brake);
@@ -51,10 +51,12 @@ public class Hanger extends Subsystem {
 	
     public Hanger() {
     	m_pivot_right.setInverted(true);
+    	m_winch_left.setInverted(true);
     	pivotLeftController.setOutputRange(-0.5, 0.5);
     	pivotRightController.setOutputRange(-0.5, 0.5);
+    	armLengthLeftController.setOutputRange(-0.5, 0.5);
+    	armLengthRightController.setOutputRange(-0.5, 0.5);
     	encoderWinchRight.setDistancePerPulse(0.015);
-    	SmartDashboard.putData("Right Length PID", armLengthRightController);
     }
     
     public void initDefaultCommand() {
@@ -97,7 +99,6 @@ public class Hanger extends Subsystem {
     public void setUnsafePivotPower(double left, double right) {
     	m_pivot_left.set(left);
     	m_pivot_right.set(right);
-    	System.out.println(ai_angle_right.get());
     }
     
     /**

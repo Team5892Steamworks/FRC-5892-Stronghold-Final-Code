@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com.team5892.frc2016.commands.*;
-import com.team5892.frc2016.commands.hanger.HangerInitHang;
+import com.team5892.frc2016.commands.hanger.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -41,13 +41,27 @@ public class OI {
 	public Joystick pilot = new Joystick(0);
 	public Joystick copilot = new Joystick(1);
 	
-	public Button shooterStart = new JoystickButton(copilot, 2);
-	public Button GearShift = new JoystickButton(copilot, 1);
+	//public Button shooterStart = new JoystickButton(copilot, 1);
 	public Button HangerInit = new JoystickButton(copilot, 5);
+	public Button hangerHome = new JoystickButton(copilot, 8);
+	public Button hangerRest = new JoystickButton(copilot, 1);
+	public Button hangerDrawbridgePre = new JoystickButton(copilot, 4);
+	public Button hangerChevalPre = new JoystickButton(copilot, 3);
+	public Button hangerSallyPortPre = new JoystickButton(copilot, 2);
+	
+	public Button shooterPrep = new JoystickButton(pilot, 5);
+	public Button shooterStow = new JoystickButton(pilot, 6);
 	
 	public OI() {
-		shooterStart.toggleWhenPressed(new ShooterSet());
-		GearShift.toggleWhenPressed(new GearShiftSet());
-		HangerInit.whenPressed(new HangerInitHang());
+		//shooterStart.toggleWhenPressed(new ShooterSet());
+		hangerHome.whileHeld(new HangerHome());
+		hangerRest.whileHeld(new HangerRest());
+		hangerDrawbridgePre.whileHeld(new HangerDrawbridgePre());
+		hangerChevalPre.whileHeld(new HangerChevalPre());
+		hangerSallyPortPre.whileHeld(new HangerSallyPre());
+		
+		shooterPrep.toggleWhenPressed(new ShooterShootPrep());
+		shooterStow.cancelWhenPressed(new ShooterShootPrep());
+		//HangerInit.whenPressed(new HangerInitHang());
 	} 
 }

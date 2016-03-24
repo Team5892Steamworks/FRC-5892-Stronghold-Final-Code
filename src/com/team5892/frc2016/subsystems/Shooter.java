@@ -33,7 +33,7 @@ public class Shooter extends PIDSubsystem {
 	public Shooter() {
 		super("Shooter", RobotMap.kFlywheelP, RobotMap.kFlywheelI, RobotMap.kFlywheelD, RobotMap.kFlywheelF);
 		m_shooter_left.setInverted(true);
-		m_shooter_right.setInverted(true);
+		//m_shooter_right.setInverted(true);
 		tach_trigger.setLimitsVoltage(RobotMap.kTachAnalogTriggerLow, RobotMap.kTachAnalogTriggerHigh);
 		tach.setUpDownCounterMode();
 	}

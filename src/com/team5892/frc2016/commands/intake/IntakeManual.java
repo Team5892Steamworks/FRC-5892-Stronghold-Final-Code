@@ -20,6 +20,15 @@ public class IntakeManual extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.oi.pilot.getRawButton(6)) {
+    		Robot.intake.setUnsafePower(0.7);
+    	}
+    	else if(Robot.oi.pilot.getRawAxis(3) > 0.5) {
+    		Robot.intake.setUnsafePower(-0.7);
+    	}
+    	else {
+    		Robot.intake.setUnsafePower(0.0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,10 +38,12 @@ public class IntakeManual extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.setUnsafePower(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.intake.setUnsafePower(0.0);
     }
 }
