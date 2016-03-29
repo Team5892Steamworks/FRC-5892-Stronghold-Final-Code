@@ -3,13 +3,14 @@ package com.team5892.frc2016.subsystems;
 import com.androb4.frc.lib.CheesySpeedController;
 import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
-import com.team5892.frc2016.commands.DriveWithJoysticks;
+import com.team5892.frc2016.commands.drive.DriveWithJoysticks;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem {
-    
+	
 	CheesySpeedController m_drive_left = new CheesySpeedController(
 			new VictorSP(RobotMap.pwm_drive_left),
 			Robot.pdp, new int[]{
@@ -20,6 +21,9 @@ public class Drive extends Subsystem {
 			Robot.pdp, new int[]{
 					RobotMap.pdp_drive_right_1,
 					RobotMap.pdp_drive_right_2});
+
+	private AnalogGyro gyro = new AnalogGyro(RobotMap.ai_gyro_drive);
+	public boolean gyroCalibrated = false;
 	
 	private double throttleDeadband = 0.02;
 	private double wheelDeadband = 0.02;
@@ -35,7 +39,7 @@ public class Drive extends Subsystem {
     }
     
     public void cheesyDrive(double throttle, double turn, boolean quickTurn) {
-    	turn = turn * -1.5;
+    	turn = turn * -1.0;
     	if (!quickTurn)
     		turn = turn * Math.abs(throttle);
     	double t_left = throttle + turn;
@@ -153,6 +157,19 @@ public class Drive extends Subsystem {
     public void tankDrive(double left, double right) {
     	m_drive_left.set(left);
     	m_drive_right.set(right);
+    }
+    
+    public double getHeading() {
+    	return gyro.getAngle();
+    }
+    
+    public void resetGyro() {
+    	gyro.reset();
+    }
+    
+    public void calibrateGyro() {
+    	gyro.calibrate();
+    	gyroCalibrated = true;
     }
     
     public double skim(double v) {
