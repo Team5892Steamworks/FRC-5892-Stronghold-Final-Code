@@ -27,15 +27,15 @@ public class Shooter extends PIDSubsystem {
 	
 	private Solenoid shooterHood = new Solenoid(RobotMap.solenoid_shooter_hood);
 	
-	private AnalogTrigger tach_trigger = new AnalogTrigger(RobotMap.ai_shooter_tach);
-	private Counter tach = new Counter(tach_trigger);
+	//private AnalogTrigger tach_trigger = new AnalogTrigger(RobotMap.ai_shooter_tach);
+	//private Counter tach = new Counter(tach_trigger);
 	
 	public Shooter() {
 		super("Shooter", RobotMap.kFlywheelP, RobotMap.kFlywheelI, RobotMap.kFlywheelD, RobotMap.kFlywheelF);
 		m_shooter_left.setInverted(true);
 		//m_shooter_right.setInverted(true);
-		tach_trigger.setLimitsVoltage(RobotMap.kTachAnalogTriggerLow, RobotMap.kTachAnalogTriggerHigh);
-		tach.setUpDownCounterMode();
+		//tach_trigger.setLimitsVoltage(RobotMap.kTachAnalogTriggerLow, RobotMap.kTachAnalogTriggerHigh);
+		//tach.setUpDownCounterMode();
 	}
 	
 	protected void initDefaultCommand() {
@@ -59,7 +59,8 @@ public class Shooter extends PIDSubsystem {
 	}
 	
 	public double getVelocity() {
-		return (60.0/tach.getPeriod())/RobotMap.kFlywheelTicksPerRev;
+		return 0.0;
+		//return (60.0/tach.getPeriod())/RobotMap.kFlywheelTicksPerRev;
 	}
 	
 	public void setShooterHood(boolean open) {
