@@ -1,13 +1,11 @@
-
 package com.team5892.frc2016;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import com.team5892.frc2016.commands.autonomous.ClassBDCross;
+import com.team5892.frc2016.commands.autonomous.*;
 import com.team5892.frc2016.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +19,8 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
+	public static CameraServer fpvCam;
+	public static RIOPixel rioPixel;
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -32,50 +32,68 @@ public class Robot extends IterativeRobot {
     	intake = new Intake();
 		oi = new OI();
 		pdp = new PowerDistributionPanel();
+		fpvCam = CameraServer.getInstance();
+		//rioPixel = new RIOPixel();
+		
+		fpvCam.setQuality(50);
+		fpvCam.setSize(0);
+		fpvCam.startAutomaticCapture("cam1");
+		
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ClassBDCross());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        //chooser.addObject("None", new CrossSimpleScoreHigh(1));
+        chooser.addObject("Cross Simple Pos. 2", new CrossSimpleScoreHigh(2));
+        chooser.addObject("Cross Simple Pos. 3", new CrossSimpleScoreHigh(3));
+        chooser.addObject("Cross Simple Pos. 4", new CrossSimpleScoreHigh(4));
+        chooser.addObject("Cross Simple Pos. 5", new CrossSimpleScoreHigh(5));
         SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putData(Scheduler.getInstance());
     }
 	
     public void disabledInit(){
-
+    	hanger.setBrake(false);
+        hanger.ptoSet(false);
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Angle Pivot Right", hanger.getRightAngle());
+		updateSmartDashboard();
 	}
 
     public void autonomousInit() {
-        
-		autonomousCommand = new ClassBDCross();
+    	hanger.setBrake(false);
+    	hanger.ptoSet(false);
     	
-    	// schedule the autonomous command (example)
+		autonomousCommand = new ClassBDCross();
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
         hanger.setBrake(false);
+        hanger.ptoSet(false);
     }
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("Angle Right", hanger.getRightAngle());
-        SmartDashboard.putNumber("Right Arm Length", hanger.encoderWinchRight.getDistance());
+        updateSmartDashboard();
     } 
     
     public void testPeriodic() {
         //LiveWindow.run();
+    }
+    
+    public void updateSmartDashboard() {
+    	SmartDashboard.putNumber("Angle Pivot Left", hanger.getLeftAngle());
+		SmartDashboard.putNumber("Angle Pivot Right", hanger.getRightAngle());
+		SmartDashboard.putNumber("Arm Length Left", hanger.encoderWinchLeft.getDistance());
+		SmartDashboard.putNumber("Arm Length Right", hanger.encoderWinchRight.getDistance());
+		SmartDashboard.putNumber("Ball Sensor", intake.ball_sensor.getVoltage());
     }
 }
