@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import com.team5892.frc2016.commands.*;
 import com.team5892.frc2016.commands.hanger.*;
+import com.team5892.frc2016.commands.intake.IntakeAuto;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,6 +52,7 @@ public class OI {
 	
 	public Button shooterPrep = new JoystickButton(pilot, 5);
 	public Button shooterStow = new JoystickButton(pilot, 6);
+	public Button intakeAuto = new JoystickButton(pilot, 1);
 	
 	public OI() {
 		//shooterStart.toggleWhenPressed(new ShooterSet());
@@ -61,7 +63,8 @@ public class OI {
 		hangerSallyPortPre.whileHeld(new HangerSallyPre());
 		
 		shooterPrep.toggleWhenPressed(new ShooterShootPrep());
-		shooterStow.cancelWhenPressed(new ShooterShootPrep());
-		//HangerInit.whenPressed(new HangerInitHang());
+		//shooterStow.cancelWhenPressed(new ShooterShootPrep());
+		intakeAuto.toggleWhenPressed(new IntakeAuto());
+		HangerInit.whenPressed(new HangerInitHang());
 	} 
 }
