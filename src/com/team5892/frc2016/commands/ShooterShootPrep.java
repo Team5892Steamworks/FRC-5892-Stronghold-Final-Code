@@ -4,6 +4,7 @@ import com.team5892.frc2016.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -19,6 +20,7 @@ public class ShooterShootPrep extends Command {
     protected void initialize() {
     	Robot.shooter.set(1);
     	Robot.shooter.setShooterHood(true);
+    	SmartDashboard.putBoolean("Shooter Status", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,12 +34,14 @@ public class ShooterShootPrep extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Scheduler.getInstance().add(new ShooterShoot());
+    	SmartDashboard.putBoolean("Shooter Status", false);
+    	//Scheduler.getInstance().add(new ShooterShoot());
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Scheduler.getInstance().add(new ShooterShoot());
+    	SmartDashboard.putBoolean("Shooter Status", false);
+    	//Scheduler.getInstance().add(new ShooterShoot());
     }
 }
