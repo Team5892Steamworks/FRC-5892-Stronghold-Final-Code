@@ -13,6 +13,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ClassBDCross extends CommandGroup {
     
     public  ClassBDCross() {
-    	addSequential(new DriveDeadReckoning(0.65, 0.65, 3.5));
+    	addSequential(new DriveDeadReckoning(0.5, 0.5, 3.5));
     }
 }
