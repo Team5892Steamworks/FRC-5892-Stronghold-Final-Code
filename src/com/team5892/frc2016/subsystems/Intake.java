@@ -19,7 +19,7 @@ public class Intake extends Subsystem {
 			Robot.pdp,
 			RobotMap.pdp_intake_1);
     
-	private AnalogInput ball_sensor = new AnalogInput(RobotMap.ai_intake_ball_sensor);
+	public AnalogInput ball_sensor = new AnalogInput(RobotMap.ai_intake_ball_sensor);
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -34,7 +34,7 @@ public class Intake extends Subsystem {
     }
     
     public boolean isBallPresent() {
-    	return ball_sensor.getValue() > RobotMap.kIntakeBallThreshold;
+    	return ball_sensor.getVoltage() < RobotMap.kIntakeBallThreshold;
     }
 }
 
