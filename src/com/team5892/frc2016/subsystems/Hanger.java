@@ -6,6 +6,8 @@ import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.hanger.*;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -38,7 +40,7 @@ public class Hanger extends Subsystem {
     public Encoder encoderWinchRight = new Encoder(RobotMap.di_hanger_winch_encoder_right_a, RobotMap.di_hanger_winch_encoder_right_b);
     
     private Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
-    private Solenoid hangerBrake = new Solenoid(RobotMap.solenoid_hanger_brake);
+    private DoubleSolenoid hangerBrake = new DoubleSolenoid(RobotMap.solenoid_hanger_brake_a, RobotMap.solenoid_hanger_brake_b);
     
 	public DigitalInput switchLeft = new DigitalInput(5);
 	public DigitalInput switchRight = new DigitalInput(6);
@@ -46,17 +48,21 @@ public class Hanger extends Subsystem {
 	PIDController pivotLeftController = new PIDController(0.05, 0.0, 0.01, ai_angle_left, m_pivot_left);
 	PIDController pivotRightController = new PIDController(0.05, 0.0, 0.01, ai_angle_right, m_pivot_right);
 	
-	PIDController armLengthLeftController = new PIDController(0.25, 0.0, 0.01, encoderWinchLeft, m_winch_left);
-	PIDController armLengthRightController = new PIDController(0.25, 0.0, 0.01, encoderWinchRight, m_winch_right);
+	PIDController armLengthLeftController = new PIDController(-0.25, 0.0, 0.01, encoderWinchLeft, m_winch_left);
+	PIDController armLengthRightController = new PIDController(-0.25, 0.0, 0.01, encoderWinchRight, m_winch_right);
+	
+	public boolean isBrakeEngaged = false;
 	
     public Hanger() {
     	m_pivot_right.setInverted(true);
     	m_winch_left.setInverted(true);
     	pivotLeftController.setOutputRange(-0.5, 0.5);
     	pivotRightController.setOutputRange(-0.5, 0.5);
-    	armLengthLeftController.setOutputRange(-0.5, 0.5);
-    	armLengthRightController.setOutputRange(-0.5, 0.5);
+    	armLengthLeftController.setOutputRange(-0.75, 0.75);
+    	armLengthRightController.setOutputRange(-0.75, 0.75);
     	encoderWinchRight.setDistancePerPulse(0.015);
+    	encoderWinchLeft.setDistancePerPulse(0.015);
+    	encoderWinchLeft.setReverseDirection(true);
     }
     
     public void initDefaultCommand() {
@@ -107,7 +113,7 @@ public class Hanger extends Subsystem {
      * @param shift Set to PTO
      */
     public void ptoSet(boolean shift) {
-    	ptoSolenoid.set(shift);
+    	ptoSolenoid.set(!shift);
     }
     
     /**
@@ -149,7 +155,15 @@ public class Hanger extends Subsystem {
     }
     
     public void setBrake(boolean on) {
-    	hangerBrake.set(!on);
+    	if(on && !isBrakeEngaged) {
+    		hangerBrake.set(Value.kForward);
+    		isBrakeEngaged = true;
+    	}
+    	else if(!on && isBrakeEngaged) {
+    		hangerBrake.set(Value.kReverse);
+    		isBrakeEngaged = false;
+    	}
+    	hangerBrake.set(Value.kOff);
     }
 }
 

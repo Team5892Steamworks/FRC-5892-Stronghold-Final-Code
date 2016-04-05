@@ -45,8 +45,9 @@ public class RobotMap {
 	
 	// Solenoid
 	public static int solenoid_hanger_pto = 0;
-	public static int solenoid_hanger_brake = 1;
-	public static int solenoid_shooter_hood = 2;
+	public static int solenoid_hanger_brake_a = 1;
+	public static int solenoid_hanger_brake_b = 2;
+	public static int solenoid_shooter_hood = 3;
 	
 	// Constants
 	public static double kTachAnalogTriggerLow = 0;
