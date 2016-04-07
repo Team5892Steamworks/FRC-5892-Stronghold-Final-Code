@@ -21,8 +21,9 @@ public class Intake extends Subsystem {
     
 	public AnalogInput ball_sensor = new AnalogInput(RobotMap.ai_intake_ball_sensor);
 	
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    public enum State {
+    	Intake, Exhaust, Off
+    }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -35,6 +36,18 @@ public class Intake extends Subsystem {
     
     public boolean isBallPresent() {
     	return ball_sensor.getVoltage() < RobotMap.kIntakeBallThreshold;
+    }
+    
+    public void set(State state) {
+    	if(state == State.Intake) {
+    		setUnsafePower(0.5);
+    	}
+    	else if(state == State.Exhaust) {
+    		setUnsafePower(-0.5);
+    	}
+    	else if(state == State.Off) {
+    		setUnsafePower(0.0);
+    	}
     }
 }
 
