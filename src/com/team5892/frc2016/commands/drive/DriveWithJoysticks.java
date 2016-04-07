@@ -20,7 +20,7 @@ public class DriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.cheesyDrive(Robot.oi.pilot.getRawAxis(1), Robot.oi.pilot.getRawAxis(4), Robot.oi.pilot.getRawButton(6));
+    	Robot.drive.cheesyDrive2(Robot.oi.pilot.getRawAxis(1), -Robot.oi.pilot.getRawAxis(4), Robot.oi.pilot.getRawButton(6));
     }
 
     // Make this return true when this Command no longer needs to run execute()
