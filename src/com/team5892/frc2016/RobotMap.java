@@ -44,10 +44,11 @@ public class RobotMap {
 	public static int ai_intake_ball_sensor = 3;
 	
 	// Solenoid
-	public static int solenoid_hanger_pto = 0;
-	public static int solenoid_hanger_brake_a = 1;
-	public static int solenoid_hanger_brake_b = 2;
-	public static int solenoid_shooter_hood = 3;
+	public static int solenoid_hanger_pto_a = 0;
+	public static int solenoid_hanger_pto_b = 1;
+	public static int solenoid_hanger_brake_a = 2;
+	public static int solenoid_hanger_brake_b = 3;
+	public static int solenoid_shooter_hood = 4;
 	
 	// Constants
 	public static double kTachAnalogTriggerLow = 0;
@@ -65,8 +66,8 @@ public class RobotMap {
 	
 	public static double kIntakeBallThreshold = 3.5;
 	
-	public static int kDriveGyroAccumulatorCenter = 0;
-	public static double kDriveGyroAccumulatorOffset = 0.0;
+	public static int kDriveGyroAccumulatorCenter = 1995325;
+	public static double kDriveGyroAccumulatorOffset = 0.171;
 	
 	public static double kFlywheelP = 0;
 	public static double kFlywheelI = 0;
