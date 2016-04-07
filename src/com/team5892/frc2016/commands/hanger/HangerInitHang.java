@@ -1,8 +1,6 @@
 package com.team5892.frc2016.commands.hanger;
 
 import com.team5892.frc2016.Robot;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**	
@@ -24,11 +22,13 @@ public class HangerInitHang extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.oi.copilot.getRawButton(6)) {
-    		Robot.drive.tankDrive(-Robot.oi.copilot.getRawAxis(5), -Robot.oi.copilot.getRawAxis(5));
+    		Robot.drive.tankDrive(Robot.oi.copilot.getRawAxis(5), Robot.oi.copilot.getRawAxis(5));
     		Robot.hanger.setWinchPower(-Robot.oi.copilot.getRawAxis(5), -Robot.oi.copilot.getRawAxis(5));
+    		Robot.hanger.ptoSet(true);
     	}
     	else {
     		Robot.hanger.setWinchPower(-Robot.oi.copilot.getRawAxis(5), -Robot.oi.copilot.getRawAxis(5));
+    		Robot.hanger.ptoSet(false);
     	}
     }
     
