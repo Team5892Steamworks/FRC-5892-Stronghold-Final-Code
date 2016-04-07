@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 
 		ballCam.setQuality(50);
 		ballCam.setSize(0);
-		//ballCam.startAutomaticCapture("cam1");
+		ballCam.startAutomaticCapture("cam1");
 		
 		autoPosition = new SendableChooser();
         autoRoutine1 = new SendableChooser();
