@@ -19,7 +19,7 @@ public class HangerHome extends Command {
     protected void initialize() {
     	Robot.hanger.setPivotAngle(1);
     	// Retract Arm
-    	Robot.hanger.setWinchPower(-0.25, -0.25);
+    	Robot.hanger.setWinchPower(0.25, 0.25);
     	Timer.delay(2.0);
     	Robot.hanger.setWinchPower(0.0, 0.0);
     	Robot.hanger.encoderWinchLeft.reset();
