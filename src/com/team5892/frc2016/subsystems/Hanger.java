@@ -10,10 +10,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hanger extends Subsystem {
     
@@ -39,7 +37,7 @@ public class Hanger extends Subsystem {
     public Encoder encoderWinchLeft = new Encoder(RobotMap.di_hanger_winch_encoder_left_a, RobotMap.di_hanger_winch_encoder_left_b);
     public Encoder encoderWinchRight = new Encoder(RobotMap.di_hanger_winch_encoder_right_a, RobotMap.di_hanger_winch_encoder_right_b);
     
-    private Solenoid ptoSolenoid = new Solenoid(RobotMap.solenoid_hanger_pto);
+    private DoubleSolenoid ptoSolenoid = new DoubleSolenoid(RobotMap.solenoid_hanger_pto_a, RobotMap.solenoid_hanger_pto_b);
     private DoubleSolenoid hangerBrake = new DoubleSolenoid(RobotMap.solenoid_hanger_brake_a, RobotMap.solenoid_hanger_brake_b);
     
 	public DigitalInput switchLeft = new DigitalInput(5);
@@ -51,6 +49,7 @@ public class Hanger extends Subsystem {
 	PIDController armLengthLeftController = new PIDController(-0.25, 0.0, 0.01, encoderWinchLeft, m_winch_left);
 	PIDController armLengthRightController = new PIDController(-0.25, 0.0, 0.01, encoderWinchRight, m_winch_right);
 	
+	public boolean isPtoEngaged = false;
 	public boolean isBrakeEngaged = false;
 	
     public Hanger() {
@@ -113,7 +112,15 @@ public class Hanger extends Subsystem {
      * @param shift Set to PTO
      */
     public void ptoSet(boolean shift) {
-    	ptoSolenoid.set(!shift);
+    	if(shift && !isPtoEngaged) {
+    		ptoSolenoid.set(Value.kForward);
+    		isPtoEngaged = true;
+    	}
+    	else if(!shift && isPtoEngaged) {
+    		ptoSolenoid.set(Value.kReverse);
+    		isPtoEngaged = false;
+    	}
+    	ptoSolenoid.set(Value.kOff);
     }
     
     /**
