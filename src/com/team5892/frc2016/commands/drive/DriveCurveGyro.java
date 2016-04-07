@@ -18,6 +18,7 @@ public class DriveCurveGyro extends Command {
 	private double error;
 	private double errorLast;
 	private double errorDeriv;
+	private boolean isDone = false;
 	
 	private Timer timer;
 	
@@ -40,23 +41,24 @@ public class DriveCurveGyro extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(timer.hasPeriodPassed(this.seconds)) {
-    		cancel();
-    		super.cancel();
+    		isDone = true;
     	}
     	Robot.drive.arcadeDrive(speed, kP * ((slope * timer.get()) - Robot.drive.getHeading()));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isDone;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drive.tankDrive(0.0, 0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drive.tankDrive(0.0, 0.0);
     }
 }
