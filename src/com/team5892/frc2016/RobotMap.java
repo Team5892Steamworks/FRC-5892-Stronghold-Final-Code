@@ -51,6 +51,11 @@ public class RobotMap {
 	public static int solenoid_shooter_hood = 4;
 	
 	// Constants
+	public static double kDriveMaxSpeedInchesPerSec = 12.4*12.0;
+	public static double kDriveMaxAccelInchesPerSecSec = 32.15 * 12.0;
+	public static double kDriveKv = 1/kDriveMaxSpeedInchesPerSec;
+	public static double kDriveKa = 1/kDriveMaxAccelInchesPerSecSec;
+	
 	public static double kTachAnalogTriggerLow = 0;
 	public static double kTachAnalogTriggerHigh = 0;
 	
