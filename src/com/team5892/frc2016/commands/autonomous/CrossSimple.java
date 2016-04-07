@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoCrossSimple extends CommandGroup {
+public class CrossSimple extends CommandGroup {
     
-    public  AutoCrossSimple() {
-        addSequential(new DriveStraightGyro(0.5, 1 /*3.0*/)); // Cross defense
+    public  CrossSimple() {
+        addSequential(new DriveStraightGyro(0.5, 1.8)); // Drive 134 inches. Cross defense
     }
 }
