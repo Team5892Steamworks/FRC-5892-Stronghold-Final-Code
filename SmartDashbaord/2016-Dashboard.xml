@@ -1,0 +1,93 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1165" y="-2"/>
+		<width>152</width>
+		<height>66</height>
+		<property name="Text" value="Connection"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="766" y="360"/>
+		<property name="Text" value="Routine 3"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="677" y="359"/>
+		<property name="Text" value="Routine 2"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="575" y="353"/>
+		<height>22</height>
+		<property name="Text" value="Routine 1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="467" y="354"/>
+		<property name="Text" value="Starting Position"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="349" y="2"/>
+		<property name="Text" value="Front"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="737" y="8"/>
+		<property name="Text" value="Back"/>
+	</static-widget>
+	<widget field="Auto Routine 3" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="754" y="370"/>
+	</widget>
+	<widget field="Auto Routine 2" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="663" y="372"/>
+	</widget>
+	<widget field="Auto Routine 1" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="564" y="372"/>
+	</widget>
+	<widget field="Auto Poistion" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="465" y="368"/>
+	</widget>
+	<widget field="Arm Length Left" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="63"/>
+	</widget>
+	<widget field="Angle Pivot Left" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="42"/>
+	</widget>
+	<widget field="Arm Length Right" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="21"/>
+	</widget>
+	<widget field="Angle Pivot Right" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="0"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
+		<location x="289" y="18"/>
+		<width>359</width>
+		<height>314</height>
+		<property name="Camera IP Address or mDNS name" value="10.58.92.7l"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
+		<location x="694" y="24"/>
+		<width>422</width>
+		<height>314</height>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="1121" y="4"/>
+		<width>244</width>
+		<height>60</height>
+		<property name="No Connection Color" value="255.102.0.255"/>
+		<property name="Graphics" value="Rounded"/>
+	</static-widget>
+	<widget field="Shooter Status" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="827" y="342"/>
+		<width>534</width>
+		<height>173</height>
+		<property name="Color to show when false" value="255.102.0.255"/>
+	</widget>
+	<widget field="Ball Sensor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="113"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="RightDrive"/>
+	<hidden field="Heading"/>
+	<hidden field="Scheduler"/>
+	<hidden field="Auto mode"/>
+	<hidden field="LeftDrive"/>
+</xml>
