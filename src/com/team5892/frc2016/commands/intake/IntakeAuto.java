@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeAuto extends Command {
 
+	private boolean isDone = false;
+	
     public IntakeAuto() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.intake);
@@ -22,12 +24,20 @@ public class IntakeAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.setUnsafePower(0.5);
+    	if(Robot.intake.isBallPresent()) {
+    		Robot.intake.setUnsafePower(0.0);
+    	}
+    	else {
+    		Robot.intake.setUnsafePower(0.5);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.intake.isBallPresent();
+    	if(Robot.oi.pilot.getRawAxis(3) > 0.5 || Robot.oi.pilot.getRawAxis(2) > 0.5) {
+    		isDone = true;
+    	}
+        return isDone;
     }
 
     // Called once after isFinished returns true
