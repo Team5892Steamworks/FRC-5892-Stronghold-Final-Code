@@ -44,6 +44,7 @@ public class OI {
 	
 	//public Button shooterStart = new JoystickButton(copilot, 1);
 	public Button HangerInit = new JoystickButton(copilot, 5);
+	public Button hangerHang = new JoystickButton(copilot, 6);
 	public Button hangerHome = new JoystickButton(copilot, 8);
 	public Button hangerRest = new JoystickButton(copilot, 1);
 	public Button hangerDrawbridgePre = new JoystickButton(copilot, 4);
@@ -66,5 +67,6 @@ public class OI {
 		//shooterStow.cancelWhenPressed(new ShooterShootPrep());
 		intakeAuto.toggleWhenPressed(new IntakeAuto());
 		HangerInit.whenPressed(new HangerInitHang());
+		hangerHang.whenPressed(new HangerHang());
 	} 
 }

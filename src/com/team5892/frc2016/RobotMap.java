@@ -46,8 +46,8 @@ public class RobotMap {
 	// Solenoid
 	public static int solenoid_hanger_pto_a = 0;
 	public static int solenoid_hanger_pto_b = 1;
-	public static int solenoid_hanger_brake_a = 2;
-	public static int solenoid_hanger_brake_b = 3;
+	public static int solenoid_hanger_brake_a = 3;
+	public static int solenoid_hanger_brake_b = 2;
 	public static int solenoid_shooter_hood = 4;
 	
 	// Constants

@@ -3,6 +3,8 @@ package com.team5892.frc2016;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import com.team5892.frc2016.commands.autonomous.*;
@@ -38,7 +40,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		pdp = new PowerDistributionPanel();
 		ballCam = CameraServer.getInstance();
-		rioPixel = new RIOPixel();
+		
+		//rioPixel = new RIOPixel();
 
 		ballCam.setQuality(50);
 		ballCam.setSize(0);
@@ -78,7 +81,7 @@ public class Robot extends IterativeRobot {
     }
 	
     public void disabledInit(){
-    	rioPixel.setLights(Pattern.Disabled);
+    	//rioPixel.setLights(0);
     }
 	
 	public void disabledPeriodic() {

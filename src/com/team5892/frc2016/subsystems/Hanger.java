@@ -112,15 +112,12 @@ public class Hanger extends Subsystem {
      * @param shift Set to PTO
      */
     public void ptoSet(boolean shift) {
-    	if(shift && !isPtoEngaged) {
+    	if(shift) {
     		ptoSolenoid.set(Value.kForward);
-    		isPtoEngaged = true;
     	}
-    	else if(!shift && isPtoEngaged) {
+    	else if(!shift) {
     		ptoSolenoid.set(Value.kReverse);
-    		isPtoEngaged = false;
     	}
-    	ptoSolenoid.set(Value.kOff);
     }
     
     /**
@@ -162,15 +159,22 @@ public class Hanger extends Subsystem {
     }
     
     public void setBrake(boolean on) {
-    	if(on && !isBrakeEngaged) {
+    	if(on) {
     		hangerBrake.set(Value.kForward);
-    		isBrakeEngaged = true;
     	}
-    	else if(!on && isBrakeEngaged) {
+    	else if(!on) {
     		hangerBrake.set(Value.kReverse);
-    		isBrakeEngaged = false;
     	}
-    	hangerBrake.set(Value.kOff);
+    }
+    
+    public void enablePID() {
+    	pivotLeftController.enable();
+    	pivotRightController.enable();
+    }
+    
+    public void disablePID() {
+    	pivotLeftController.disable();
+    	pivotRightController.disable();
     }
 }
 
