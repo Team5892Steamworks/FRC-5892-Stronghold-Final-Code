@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import com.team5892.frc2016.commands.autonomous.*;
 import com.team5892.frc2016.subsystems.*;
+import com.team5892.frc2016.subsystems.RIOPixel.Pattern;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -76,7 +78,7 @@ public class Robot extends IterativeRobot {
     }
 	
     public void disabledInit(){
-    	
+    	rioPixel.setLights(Pattern.Disabled);
     }
 	
 	public void disabledPeriodic() {

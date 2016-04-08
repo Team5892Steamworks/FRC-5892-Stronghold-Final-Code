@@ -10,18 +10,19 @@ public class RIOPixel extends Subsystem {
     
 	private SerialPort rioPixelSerial;
 	
-	public enum Lights {
-		noComm(0), disabled(1), autoIntake(2), spinUp(3), shoot(4), scalingMode(5), scaled(6);
-		
-		private int value;
-		
-		private Lights(int value) {
-		      this.value = value;
-		}
+	public enum Pattern {
+		NoCommm(0), Disabled(1), Standby(2), AutoIntake(3), IsBall(4), FlywheelSpinUp(5), Shoot(6), ScaleMode(7), Scaled(8);
 
-	    public int getValue() {
-	      return this.value;
-	    }
+		int controlByte;
+		
+		Pattern(int controlByte) {
+			this.controlByte = controlByte;
+		}
+		
+		int getControlByte() {
+			return this.controlByte;
+		}
+		
 	}
 	
 	public RIOPixel() {
@@ -41,8 +42,13 @@ public class RIOPixel extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setLights(Lights pattern) {
-    	
+    public void setLights(Pattern pattern) {
+		try {
+			rioPixelSerial.write(new byte[]{(byte) pattern.getControlByte()}, 1);
+		}
+		catch(Exception e) {
+			System.err.println(e);
+		}
     }
 }
 

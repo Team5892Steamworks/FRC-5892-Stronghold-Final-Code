@@ -1,6 +1,8 @@
 package com.team5892.frc2016.commands.hanger;
 
 import com.team5892.frc2016.Robot;
+import com.team5892.frc2016.subsystems.RIOPixel.Pattern;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**	
@@ -17,6 +19,7 @@ public class HangerInitHang extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.hanger.setPivotAngle(95.0);
+    	Robot.rioPixel.setLights(Pattern.ScaleMode);
     }
 
     // Called repeatedly when this Command is scheduled to run

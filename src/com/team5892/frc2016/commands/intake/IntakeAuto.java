@@ -1,6 +1,7 @@
 package com.team5892.frc2016.commands.intake;
 
 import com.team5892.frc2016.Robot;
+import com.team5892.frc2016.subsystems.RIOPixel.Pattern;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,6 +17,7 @@ public class IntakeAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.rioPixel.setLights(Pattern.AutoIntake);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,6 +33,7 @@ public class IntakeAuto extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.intake.setUnsafePower(0.0);
+    	Robot.rioPixel.setLights(Pattern.IsBall);
     }
 
     // Called when another command which requires one or more of the same
