@@ -15,7 +15,6 @@ public class HangerInitHang extends Command {
     public HangerInitHang() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.hanger);
-        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
