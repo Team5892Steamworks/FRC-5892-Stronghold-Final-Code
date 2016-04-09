@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossSimple extends CommandGroup {
     
     public  CrossSimple() {
-        addSequential(new DriveStraightGyro(0.7, 1.8)); // Drive 134 inches. Cross defense
+        addSequential(new DriveStraightGyro(0.08, 2.0)); // Drive 134 inches. Cross defense
     }
 }
