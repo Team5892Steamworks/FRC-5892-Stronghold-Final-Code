@@ -23,7 +23,7 @@ public class HangerHang extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.tankDrive(-Robot.oi.copilot.getRawAxis(5), -Robot.oi.copilot.getRawAxis(5));
+    	Robot.drive.tankDrive(Robot.oi.copilot.getRawAxis(5), Robot.oi.copilot.getRawAxis(5));
 		Robot.hanger.setWinchPower(-Robot.oi.copilot.getRawAxis(5), -Robot.oi.copilot.getRawAxis(5));
 		Robot.hanger.ptoSet(true);
 		if(Robot.oi.copilot.getRawAxis(3) > 0.5) {

@@ -23,7 +23,7 @@ public class AutoCompiler extends CommandGroup {
 		// Do stuff with the auto position
 		
 		if(routines[0] == Routines.CrossSimple) {
-			addSequential(new CrossSimple());
+			addSequential(new ClassBDCross());
 		}
 		else if(routines[0] == Routines.CrossLowBar) {
 			addSequential(new CrossLowBar());
