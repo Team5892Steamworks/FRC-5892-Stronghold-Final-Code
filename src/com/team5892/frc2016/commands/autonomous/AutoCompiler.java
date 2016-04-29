@@ -23,7 +23,7 @@ public class AutoCompiler extends CommandGroup {
 		// Do stuff with the auto position
 		
 		if(routines[0] == Routines.CrossSimple) {
-			addSequential(new ClassBDCross());
+			addSequential(new CrossSimple());
 		}
 		else if(routines[0] == Routines.CrossLowBar) {
 			addSequential(new CrossLowBar());
@@ -42,17 +42,17 @@ public class AutoCompiler extends CommandGroup {
 			addSequential(new IntakeSet(Intake.State.Exhaust));
 		}
 		else if(routines[1] == Routines.Return) {
-			addSequential(new AutoDoNothing());
+			//addSequential(new AutoDoNothing());
 		}
 		else if(routines[1] == Routines.None) {
-			addSequential(new AutoDoNothing());
+			//addSequential(new AutoDoNothing());
 		}
 		
 		if(routines[2] == Routines.None) {
-			addSequential(new AutoDoNothing());
+			//addSequential(new AutoDoNothing());
 		}
 		else if(routines[2] == Routines.Return) {
-			addSequential(new AutoDoNothing());
+			//addSequential(new AutoDoNothing());
 		}
 	}
 	

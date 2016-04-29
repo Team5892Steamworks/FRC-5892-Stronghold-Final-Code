@@ -8,26 +8,28 @@ package com.team5892.frc2016;
 public class RobotMap {
 	
 	// PWM
-	public static int pwm_drive_left = 0;
-	public static int pwm_drive_right = 1;
-	public static int pwm_shooter_left = 2;
-	public static int pwm_shooter_right = 3;
-	public static int pwm_hanger_pivot_left = 4;
-	public static int pwm_hanger_pivot_right = 5;
-	public static int pwm_hanger_winch_left = 6;
-	public static int pwm_hanger_winch_right = 7;
+	public static int pwm_drive_left = 3;
+	public static int pwm_drive_right = 0;
+	public static int pwm_shooter_left = 6;
+	public static int pwm_shooter_right = 7;
+	public static int pwm_hanger_pivot_left = 5;
+	public static int pwm_hanger_pivot_right = 2;
+	public static int pwm_hanger_winch_left = 4;
+	public static int pwm_hanger_winch_right = 1; // Uncomment on final robot
 	public static int pwm_intake_1 = 8;
+	public static int pwm_intake_2 = 9;
 	
 	// PDP
-	public static int pdp_drive_left_1 = 14;
-	public static int pdp_drive_left_2 = 13;
-	public static int pdp_drive_right_1 = 2;
-	public static int pdp_drive_right_2 = 3;
+	public static int pdp_drive_left_1 = 3;
+	public static int pdp_drive_left_2 = 2;
+	public static int pdp_drive_right_1 = 0;
+	public static int pdp_drive_right_2 = 1;
 	public static int pdp_shooter_left = 15;
 	public static int pdp_shooter_right = 12;
-	public static int pdp_intake_1 = 9;
-	public static int pdp_hanger_pivot_left = 0;
-	public static int pdp_hanger_pivot_right = 1;
+	public static int pdp_intake_1 = 4;
+	public static int pdp_intake_2 = 5;
+	public static int pdp_hanger_pivot_left = 14;
+	public static int pdp_hanger_pivot_right = 15;
 	public static int pdp_hanger_winch_left = 10;
 	public static int pdp_hanger_winch_right = 11;
 	
@@ -68,7 +70,7 @@ public class RobotMap {
 	public static double kHangerLeftUpLimitDegrees = 100;
 	public static double kHangerRightBottomLimitDegrees = 2;
 	public static double kHangerRightUpLimitDegrees = 100;
-	
+
 	public static double kIntakeBallThreshold = 3.5;
 	
 	public static int kDriveGyroAccumulatorCenter = 1995325;

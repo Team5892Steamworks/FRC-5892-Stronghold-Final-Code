@@ -18,6 +18,7 @@ public class ShooterShootPrep extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//Robot.rioPixel.setLights(5);
     	Robot.shooter.set(1);
     	Robot.shooter.setShooterHood(true);
     	SmartDashboard.putBoolean("Shooter Status", true);

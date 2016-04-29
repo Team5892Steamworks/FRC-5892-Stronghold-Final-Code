@@ -16,7 +16,7 @@ void setAllToBlack();
 void setPixel(int pixel, int r, int g, int b, CRGB strip);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   FastLED.addLeds<NEOPIXEL, RING_DATA_PIN>(ring_leds, RING_NUM_LEDS).setCorrection( TypicalLEDStrip );
   FastLED.addLeds<NEOPIXEL, STRIP_LEFT_DATA_PIN>(strip_left_leds, STRIP_LEFT_NUM_LEDS).setCorrection( TypicalLEDStrip );
@@ -45,8 +45,8 @@ long i = 0;
 
 void loop() {
   if (Serial.available() > 0) {
-    controlByte = Serial.read() - '0';
-    Serial.println(controlByte);
+    controlByte = Serial.read();
+    //Serial.println(controlByte);
     if (controlByte == 0) {
       interval = 15;
     }

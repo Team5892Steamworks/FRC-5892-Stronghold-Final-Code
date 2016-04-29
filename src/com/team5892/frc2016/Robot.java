@@ -1,15 +1,13 @@
 package com.team5892.frc2016;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import com.team5892.frc2016.commands.autonomous.*;
 import com.team5892.frc2016.subsystems.*;
-import com.team5892.frc2016.subsystems.RIOPixel.Pattern;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -42,10 +40,15 @@ public class Robot extends IterativeRobot {
 		ballCam = CameraServer.getInstance();
 		
 		//rioPixel = new RIOPixel();
-
+		
 		ballCam.setQuality(50);
 		ballCam.setSize(0);
-		ballCam.startAutomaticCapture("cam1");
+		try {
+			ballCam.startAutomaticCapture("cam0");
+		}
+		catch(Exception e) {
+			DriverStation.reportError("Error starting camera feed: " + e.getMessage(), true);
+		}
 		
 		autoPosition = new SendableChooser();
         autoRoutine1 = new SendableChooser();
@@ -81,7 +84,7 @@ public class Robot extends IterativeRobot {
     }
 	
     public void disabledInit(){
-    	//rioPixel.setLights(0);
+    	//rioPixel.setLights(1);
     }
 	
 	public void disabledPeriodic() {
@@ -92,6 +95,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	hanger.setBrake(false);
     	hanger.ptoSet(false);
+    	
+    	drive.zeroYaw();
     	
 		autonomousCommand = new AutoCompiler();
         if (autonomousCommand != null) autonomousCommand.start();
@@ -104,7 +109,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
 
-    	Robot.drive.resetGyro();
+    	Robot.drive.resetAHRS();
         if (autonomousCommand != null) autonomousCommand.cancel();
         
         hanger.setBrake(false);
@@ -125,7 +130,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Angle Pivot Right", hanger.getRightAngle());
 		SmartDashboard.putNumber("Arm Length Left", hanger.encoderWinchLeft.getDistance());
 		SmartDashboard.putNumber("Arm Length Right", hanger.encoderWinchRight.getDistance());
-		SmartDashboard.putNumber("Ball Sensor", intake.ball_sensor.getVoltage());
-		SmartDashboard.putNumber("Heading", drive.getHeading());
+		SmartDashboard.putBoolean("Ball Sensor", intake.isBallPresent());
+		SmartDashboard.putNumber("Heading", drive.getYaw());
+		SmartDashboard.putBoolean("IS AT SETPOINT", hanger.isAngleAtSetpoint());
     }
 }

@@ -51,17 +51,26 @@ public class Hanger extends Subsystem {
 	
 	public boolean isPtoEngaged = false;
 	public boolean isBrakeEngaged = false;
+	public boolean isAngleAtSetpoint = false;
 	
     public Hanger() {
+    	// Motors
+    	m_pivot_left.setInverted(false);
     	m_pivot_right.setInverted(true);
     	m_winch_left.setInverted(true);
+    	m_winch_right.setInverted(false);
+    	// Pivot Controllers
     	pivotLeftController.setOutputRange(-0.5, 0.5);
     	pivotRightController.setOutputRange(-0.5, 0.5);
+    	pivotLeftController.setPercentTolerance(50);
+    	// Arm Length Controllers
     	armLengthLeftController.setOutputRange(-0.75, 0.75);
     	armLengthRightController.setOutputRange(-0.75, 0.75);
+    	// Sensors
     	encoderWinchRight.setDistancePerPulse(0.015);
     	encoderWinchLeft.setDistancePerPulse(0.015);
     	encoderWinchLeft.setReverseDirection(true);
+    	encoderWinchRight.setReverseDirection(false);
     }
     
     public void initDefaultCommand() {
@@ -139,6 +148,7 @@ public class Hanger extends Subsystem {
     }
     
     public void setPivotAngle(double angle) {
+    	isAngleAtSetpoint = false;
     	if(!pivotLeftController.isEnabled())
     		pivotLeftController.enable();
     	pivotLeftController.setSetpoint(angle);
@@ -175,6 +185,14 @@ public class Hanger extends Subsystem {
     public void disablePID() {
     	pivotLeftController.disable();
     	pivotRightController.disable();
+    }
+    
+    public boolean isAngleAtSetpoint() {
+    	isAngleAtSetpoint = false;
+    	if(getLeftAngle() - pivotLeftController.getSetpoint() < 3.0 && getLeftAngle() - pivotLeftController.getSetpoint() > -3.0) {
+    		isAngleAtSetpoint = true;
+    	}
+    	return isAngleAtSetpoint;
     }
 }
 

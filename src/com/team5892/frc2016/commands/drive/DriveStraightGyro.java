@@ -13,7 +13,7 @@ public class DriveStraightGyro extends Command {
 	Timer timer;
 	private double speed;
 	private double seconds;	
-	private double kP = 0.015;
+	private double kP = -0.015;
 	private boolean isDone = false;
 	
     public DriveStraightGyro(double speed, double seconds) {
@@ -26,7 +26,6 @@ public class DriveStraightGyro extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.resetGyro();
     	timer.start();
     }
 
@@ -35,7 +34,7 @@ public class DriveStraightGyro extends Command {
     	if(timer.hasPeriodPassed(seconds)) {
     		isDone = true;
     	}
-    	Robot.drive.arcadeDrive(speed, kP * -Robot.drive.getHeading());
+    	Robot.drive.arcadeDrive(speed, kP * Robot.drive.getYaw());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,11 +1,13 @@
 package com.team5892.frc2016.subsystems;
 
 import com.androb4.frc.lib.CheesySpeedController;
+import com.kauailabs.navx.frc.AHRS;
 import com.team5892.frc2016.Robot;
 import com.team5892.frc2016.RobotMap;
 import com.team5892.frc2016.commands.drive.DriveWithJoysticks;
-
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,20 +16,27 @@ public class Drive extends Subsystem {
 
 	CheesySpeedController m_drive_left = new CheesySpeedController(new VictorSP(RobotMap.pwm_drive_left), Robot.pdp,
 			new int[] { RobotMap.pdp_drive_left_1, RobotMap.pdp_drive_left_2 });
+
 	CheesySpeedController m_drive_right = new CheesySpeedController(new VictorSP(RobotMap.pwm_drive_right), Robot.pdp,
 			new int[] { RobotMap.pdp_drive_right_1, RobotMap.pdp_drive_right_2 });
-
+	
 	private AnalogGyro gyro = new AnalogGyro(RobotMap.ai_gyro_drive, RobotMap.kDriveGyroAccumulatorCenter,
 			RobotMap.kDriveGyroAccumulatorOffset);
 	public boolean gyroCalibrated = false;
 
+	public AHRS ahrs;
+	
 	private double throttleDeadband = 0.02;
 	private double wheelDeadband = 0.02;
 	double oldWheel, quickStopAccumulator;
 
 	public Drive() {
-		gyro.initGyro();
-		//calibrateGyro();
+		try {
+			ahrs = new AHRS(SPI.Port.kMXP);
+		}
+		catch(Exception e) {
+			DriverStation.reportError("Error instantiating navX MXP: " + e.getMessage(), true);
+		}
 		m_drive_right.setInverted(true);
 	}
 
@@ -155,12 +164,16 @@ public class Drive extends Subsystem {
 		m_drive_right.set(-right);
 	}
 
-	public double getHeading() {
-		return -gyro.getAngle();
+	public double getYaw() {
+		return -ahrs.getYaw();
+	}
+	
+	public void zeroYaw() {
+		ahrs.zeroYaw();
 	}
 
-	public void resetGyro() {
-		gyro.reset();
+	public void resetAHRS() {
+		ahrs.reset();
 	}
 
 	public void calibrateGyro() {

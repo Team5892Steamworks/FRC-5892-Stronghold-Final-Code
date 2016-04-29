@@ -24,11 +24,13 @@ public class IntakeAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.intake.isBallPresent()) {
-    		Robot.intake.setUnsafePower(0.0);
+    	if(!Robot.intake.isBallPresent()) {
+    		Robot.intake.setUnsafePower(0.5);
+    		Robot.intake.setHarvesterUnsafe(0.5);
     	}
     	else {
-    		Robot.intake.setUnsafePower(0.5);
+    		Robot.intake.setUnsafePower(0.0);
+    		Robot.intake.setHarvesterUnsafe(0.0);
     	}
     }
 
@@ -43,6 +45,7 @@ public class IntakeAuto extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.intake.setUnsafePower(0.0);
+    	Robot.intake.setHarvesterUnsafe(0.0);
     	//Robot.rioPixel.setLights(4);
     }
 
@@ -50,5 +53,6 @@ public class IntakeAuto extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.intake.setUnsafePower(0.0);
+    	Robot.intake.setHarvesterUnsafe(0.0);
     }
 }

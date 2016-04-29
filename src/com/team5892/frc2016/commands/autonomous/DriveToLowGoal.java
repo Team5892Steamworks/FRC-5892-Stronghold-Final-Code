@@ -10,7 +10,7 @@ public class DriveToLowGoal extends CommandGroup {
     
     public DriveToLowGoal(int position) {
     	if(position == 1) {
-    		addSequential(new DriveCurveGyro(-0.5, 2.0, -50.0));
+    		addSequential(new DriveCurveGyro(-0.4, 1.3, -50));
     	}
     }
 }

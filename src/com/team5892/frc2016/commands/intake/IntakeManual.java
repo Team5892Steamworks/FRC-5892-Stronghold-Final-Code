@@ -22,12 +22,15 @@ public class IntakeManual extends Command {
     protected void execute() {
     	if(Robot.oi.pilot.getRawAxis(3) > 0.5) {
     		Robot.intake.setUnsafePower(0.7);
+    		Robot.intake.setHarvesterUnsafe(0.5);
     	}
     	else if(Robot.oi.pilot.getRawAxis(2) > 0.5) {
     		Robot.intake.setUnsafePower(-0.7);
+    		Robot.intake.setHarvesterUnsafe(-0.5);
     	}
     	else {
     		Robot.intake.setUnsafePower(0.0);
+    		Robot.intake.setHarvesterUnsafe(0.0);
     	}
     }
 
@@ -39,11 +42,13 @@ public class IntakeManual extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.intake.setUnsafePower(0.0);
+    	Robot.intake.setHarvesterUnsafe(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.intake.setUnsafePower(0.0);
+    	Robot.intake.setHarvesterUnsafe(0.0);
     }
 }

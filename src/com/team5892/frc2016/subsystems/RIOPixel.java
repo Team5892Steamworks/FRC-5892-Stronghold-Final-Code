@@ -1,6 +1,7 @@
 package com.team5892.frc2016.subsystems;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.WriteBufferMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class RIOPixel {
     
-	private SerialPort rioPixelSerial;
+	public SerialPort rioPixelSerial;
 	byte[] controlByte = {0};
 	
 	public enum Pattern {
@@ -28,21 +29,23 @@ public class RIOPixel {
 	
 	public RIOPixel() {
 		try {
-			rioPixelSerial = new SerialPort(115200, SerialPort.Port.kUSB);
+			rioPixelSerial = new SerialPort(9600, SerialPort.Port.kUSB);
+			rioPixelSerial.setTimeout(0.01);
 			System.out.println("RIOPixel Initialized");
 		}
 		catch(Exception e) {
-			System.err.println(e);
+			System.err.println("RIOPixel Initialization Error");
 		}
 	}
     
     public void setLights(int pattern) {
+    	controlByte[0] = (byte)pattern;
 		try {
 			rioPixelSerial.write(controlByte, 1);
 			System.out.println("RIOPixel Pattern Set");
 		}
 		catch(Exception e) {
-			System.err.println(e);
+			System.err.println("RIOPixel Write Error");
 		}
     }
 }

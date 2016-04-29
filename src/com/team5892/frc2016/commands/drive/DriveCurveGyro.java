@@ -14,7 +14,7 @@ public class DriveCurveGyro extends Command {
 	private double seconds;
 	private double theta;
 	private double slope;
-	private double kP = 0.01;
+	private double kP = -0.01;
 	private double error;
 	private double errorLast;
 	private double errorDeriv;
@@ -34,7 +34,6 @@ public class DriveCurveGyro extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.resetGyro();
     	timer.start();
     }
 
@@ -43,7 +42,7 @@ public class DriveCurveGyro extends Command {
     	if(timer.hasPeriodPassed(this.seconds)) {
     		isDone = true;
     	}
-    	Robot.drive.arcadeDrive(speed, kP * ((slope * timer.get()) - Robot.drive.getHeading()));
+    	Robot.drive.arcadeDrive(speed, kP * ((slope * timer.get()) - Robot.drive.getYaw()));
     }
 
     // Make this return true when this Command no longer needs to run execute()
