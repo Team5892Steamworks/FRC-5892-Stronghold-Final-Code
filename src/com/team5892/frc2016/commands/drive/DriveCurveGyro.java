@@ -14,7 +14,7 @@ public class DriveCurveGyro extends Command {
 	private double seconds;
 	private double theta;
 	private double slope;
-	private double kP = -0.01;
+	private double kP = 0.01;
 	private double error;
 	private double errorLast;
 	private double errorDeriv;
