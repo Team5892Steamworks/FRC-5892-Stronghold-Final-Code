@@ -34,8 +34,8 @@ public class RobotMap {
 	public static int pdp_hanger_winch_right = 11;
 	
 	// DIO
-	public static int di_hanger_winch_encoder_left_a = 0;
-	public static int di_hanger_winch_encoder_left_b = 1;
+	public static int di_hanger_winch_encoder_left_a = 8;
+	public static int di_hanger_winch_encoder_left_b = 9;
 	public static int di_hanger_winch_encoder_right_a = 2;
 	public static int di_hanger_winch_encoder_right_b = 3;
 
